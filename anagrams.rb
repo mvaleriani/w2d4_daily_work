@@ -41,3 +41,26 @@ def anagram3?(str1, str2)
   p (Time.now - time) * 1000
   b
 end
+
+def anagram4?(str1, str2)
+  time = Time.now
+  hash = Hash.new
+  return false unless str1.length == str2.length
+  (0...str1.length).each do | idx |
+    if hash[str1[idx]].nil?
+      hash[str1[idx]] = [1,0]
+    else
+      hash[str1[idx]][0] += 1
+    end
+    if hash[str2[idx]].nil?
+      hash[str2[idx]] = [0,1]
+    else
+      hash[str2[idx]][1] += 1
+    end
+  end
+  hash.each do | k, v |
+    return false unless v[0] == v[1]
+  end
+  p (Time.now - time) * 1000
+  return true
+end
